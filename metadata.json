@@ -1,0 +1,6 @@
+{
+  "name": "Corporate Client Intake Portal",
+  "description": "A premium, professional 13-step client onboarding and intake form with automated draft state saving, validation, asset file uploads, and modular Formspree submission.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
