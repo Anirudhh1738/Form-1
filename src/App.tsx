@@ -30,7 +30,7 @@ export default function App() {
   const [state, setState] = useState<FormState>(INITIAL_FORM_STATE);
   const [formspreeEndpoint, setFormspreeEndpoint] = useState<string>(() => {
     return (
-      localStorage.getItem("goldline_endpoint_custom") ||
+      
       ((import.meta as any).env?.VITE_FORMSPREE_ENDPOINT as string) ||
       "https://formspree.io/f/xgobqgkk"
     );
