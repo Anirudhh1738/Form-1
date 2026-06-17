@@ -32,7 +32,7 @@ export default function App() {
     return (
       localStorage.getItem("goldline_endpoint_custom") ||
       ((import.meta as any).env?.VITE_FORMSPREE_ENDPOINT as string) ||
-      "https://formspree.io/f/placeholder"
+      "https://formspree.io/f/xgobqgkk"
     );
   });
   const [showEndpointConfig, setShowEndpointConfig] = useState<boolean>(false);
