@@ -6,7 +6,7 @@ import {
   StepDefinition 
 } from "./constants";
 import { FormState, TeamMember, Testimonial } from "./types";
-import { submitToFormspree } from "./formspreeService";
+import { submitToFormSubmit } from "./formSubmitService";
 import { StepFields } from "./components/StepFields";
 import { 
   Building2, 
@@ -28,13 +28,11 @@ import {
 export default function App() {
   const [activeStep, setActiveStep] = useState<number>(1);
   const [state, setState] = useState<FormState>(INITIAL_FORM_STATE);
-  const [formspreeEndpoint, setFormspreeEndpoint] = useState<string>(() => {
-    return (
-      
-      ((import.meta as any).env?.VITE_FORMSPREE_ENDPOINT as string) ||
-      "https://formspree.io/f/xgobqgkk"
-    );
-  });
+  const [formSubmitEndpoint, setFormSubmitEndpoint] = useState<string>(() => {
+  return (
+    "https://formsubmit.co/anitsop1738@gmail.com"
+  );
+});
   const [showEndpointConfig, setShowEndpointConfig] = useState<boolean>(false);
   const [showHelpDrawer, setShowHelpDrawer] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -349,7 +347,7 @@ export default function App() {
     }
 
     setIsSubmitting(true);
-    const apiResult = await submitToFormspree(formspreeEndpoint, state, files);
+    const apiResult = await submitToFormSubmit(formSubmitEndpoint, state, files);
     setIsSubmitting(false);
 
     setSubmitResult(apiResult);
@@ -390,10 +388,10 @@ export default function App() {
           {/* Formspree endpoint quick connector */}
           <div className="flex items-center gap-2 md:self-center self-start bg-slate-900/60 p-1.5 rounded-lg border border-slate-800">
             <div className="text-[11px] font-mono pl-2 text-slate-400">
-              Formspree:
+              FormSubmit:
             </div>
             
-            <span className={`w-2 h-2 rounded-full shrink-0 animate-pulse ${formspreeEndpoint.includes("placeholder") ? "bg-red-400" : "bg-emerald-400"}`}></span>
+            <span className={`w-2 h-2 rounded-full shrink-0 animate-pulse ${formSubmitEndpoint.includes("placeholder") ? "bg-red-400" : "bg-emerald-400"}`}></span>
             
             <button
               id="btn-toggle-endpoint-config"
@@ -401,7 +399,7 @@ export default function App() {
               className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-brand-gold-400 hover:text-brand-gold-300 rounded text-xs font-semibold flex items-center gap-1 transition-all"
             >
               <Settings className="w-3.5 h-3.5" />
-              {formspreeEndpoint.includes("placeholder") ? "Unconfigured" : "Connected"}
+              {formSubmitEndpoint.includes("placeholder") ? "Unconfigured" : "Connected"}
             </button>
           </div>
 
@@ -435,19 +433,19 @@ export default function App() {
                 <input
                   id="input-formspree-endpoint"
                   type="url"
-                  value={formspreeEndpoint}
+                  value={formSubmitEndpoint}
                   onChange={(e) => {
                     const val = e.target.value;
-                    setFormspreeEndpoint(val);
+                    setformSubmitEndpoint(val);
                     localStorage.setItem("goldline_endpoint_custom", val);
                   }}
-                  placeholder="https://formspree.io/f/xbjnqdyo"
+                  placeholder="https://formsubmit.co/f/xbjnqdyo"
                   className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-gold-500 font-mono"
                 />
                 <button
                   id="btn-reset-endpoint-to-default"
                   onClick={() => {
-                    setFormspreeEndpoint("https://formspree.io/f/placeholder");
+                    setformSubmitEndpoint("https://formsubmit.co/f/placeholder");
                     localStorage.removeItem("goldline_endpoint_custom");
                   }}
                   className="px-3 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded font-semibold border border-slate-700 whitespace-nowrap"
@@ -457,7 +455,7 @@ export default function App() {
               </div>
               <div className="flex items-center gap-1.5 text-[10px] text-amber-300">
                 <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                <span>By default, submissions use a sandbox mock. Register at <strong>formspree.io</strong> to get your endpoint.</span>
+                <span>By default, submissions use a sandbox mock. Register at <strong>formsubmit.co</strong> to get your endpoint.</span>
               </div>
             </motion.div>
           )}
